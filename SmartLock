@@ -1,5 +1,8 @@
 #define BLYNK_TEMPLATE_ID "TMPL3CgjpaKn2"
 #define BLYNK_TEMPLATE_NAME "smart lock system"
+#define BLYNK_AUTH_TOKEN "zv9iNFTh8xvnVa4n3TFPjaRwSYsnopMI"
+#define BLYNK_TEMPLATE_ID "TMPL3CgjpaKn2"
+#define BLYNK_TEMPLATE_NAME "smart lock system"
 
 
 #define BLYNK_PRINT Serial
