@@ -1,0 +1,53 @@
+#define BLYNK_TEMPLATE_ID "TMPL3CgjpaKn2"
+#define BLYNK_TEMPLATE_NAME "smart lock system"
+
+
+#define BLYNK_PRINT Serial
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+#include <ESP32Servo.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+char auth[] = "zv9iNFTh8xvnVa4n3TFPjaRwSYsnopMI";
+char ssid[] = "KANNA";
+char pass[] = "yk300726";
+
+#define SERVO_PIN  13
+Servo myServo;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+BLYNK_WRITE(V0) {
+  int value = param.asInt();
+  if (value == 1) {
+    myServo.write(0);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Door is Locked");
+  } else {
+    myServo.write(180);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Door is Opened");
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  Blynk.begin(auth, ssid, pass);
+  
+  myServo.attach(SERVO_PIN);
+  myServo.write(0);
+  
+  lcd.begin();
+ 
+  lcd.backlight();
+  lcd.setCursor(2, 0);
+  lcd.print("Door Locking");
+  lcd.setCursor(4, 1);
+  lcd.print("System");
+}
+
+void loop() {
+  Blynk.run();
+}
